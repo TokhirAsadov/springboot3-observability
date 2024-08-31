@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uz.tokhir.loanservice.dto.LoanDto;
 
 import java.math.BigDecimal;
 
@@ -20,4 +21,20 @@ public class Loan {
     private BigDecimal amount;
     private LoanStatus loanStatus;
 
+    public static Loan from(LoanDto loanDto) {
+        if (loanDto.getLoanId() == null && loanDto.getLoanStatus() == null) {
+            return Loan.builder()
+                    .loanId(loanDto.getLoanId())
+                    .amount(loanDto.getAmount())
+                    .customerId(loanDto.getCustomerId())
+                    .customerName(loanDto.getCustomerName())
+                    .build();
+        }
+        return Loan.builder()
+                .loanId(loanDto.getLoanId())
+                .amount(loanDto.getAmount())
+                .customerId(loanDto.getCustomerId())
+                .customerName(loanDto.getCustomerName())
+                .build();
+    }
 }
